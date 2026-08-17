@@ -3,7 +3,7 @@
 @section('title', 'Landing Page do Projeto')
 
 @section('content')
-    <script src="https://cdn.tailwindcss.com"></script>
+    
     
     <section class="relative overflow-hidden rounded-3xl bg-slate-950 px-8 py-16 text-white shadow-2xl">
     <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan-400/30 blur-3xl"></div>

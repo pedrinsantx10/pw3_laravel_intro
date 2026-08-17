@@ -7,6 +7,7 @@ Route::get('/', function () {
 });
 
 Route::view('/landing', 'landing');
+Route::view('/admin', 'admin.dashboard');
 
 use App\Http\Controllers\LivroController;
 
