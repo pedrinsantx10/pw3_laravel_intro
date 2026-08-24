@@ -18,3 +18,14 @@ use App\Http\Controllers\ProdutoController;
 
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
+
+use App\Models\User;
+
+Route::get('/teste-orm', function() {
+    User::create([
+     'name' => 'Ana Clara Santos',
+     'email' => 'ana.santos@escola.sp.gov.br',
+     'password' => '12345678',
+    ]);
+    return User::all();
+});
