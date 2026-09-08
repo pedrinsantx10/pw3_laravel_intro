@@ -9,6 +9,13 @@ Route::get('/', function () {
 Route::view('/landing', 'landing');
 Route::view('/admin', 'admin.dashboard');
 
+use App\Http\Controllers\UserController;
+
+// Rota para carregar o formulário (GET)
+Route::get('/usuarios/novo', [UserController::class, 'create']);
+// Rota para salvar os dados enviados (POST)
+Route::post('/usuarios', [UserController::class, 'store']);
+
 use App\Http\Controllers\LivroController;
 
 Route::get('/livros', [LivroController::class, 'index']);
@@ -23,8 +30,8 @@ use App\Models\User;
 
 Route::get('/teste-orm', function() {
     User::create([
-     'name' => 'Ana Clara Santos',
-     'email' => 'ana.santos@escola.sp.gov.br',
+     'name' => 'Pedro Henrique',
+     'email' => 'pedro.henrique@escola.sp.gov.br',
      'password' => '12345678',
     ]);
     return User::all();

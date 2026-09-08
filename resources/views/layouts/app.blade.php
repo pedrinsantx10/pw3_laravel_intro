@@ -20,8 +20,8 @@
     </div>
 </header>
 
-    <main class="container">
-        @yield('content')
+    <main class="container mx-auto my-8 px-4">
+    @yield('content')
     </main>
 
     <footer class="site-footer">
