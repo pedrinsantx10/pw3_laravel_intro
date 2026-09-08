@@ -9,7 +9,7 @@
         <h2 class="text-3xl font-bold text-slate-900">Painel Administrativo</h2>
         <p class="text-slate-600">Resumo rápido do sistema para tomada de decisão.</p>
     </div>
-    <a href="#" class="rounded-lg bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-700">
+    <a href="/usuarios/novo" class="rounded-lg bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-700">
         Novo registro
     </a>
 </section>
@@ -65,6 +65,9 @@
                 </tr>
 
                 {{-- Próximas aulas: Registros dinâmicos com Blade e Eloquent --}}
+                @php
+                    $users = App\Models\User::all();
+                @endphp
             @foreach ($users as $user)
                 <tr class="border-b border-slate-100">
                     <td class="py-3 font-medium text-slate-900">{{ $user->name }}</td>
