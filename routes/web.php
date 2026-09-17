@@ -11,9 +11,11 @@ Route::view('/admin', 'admin.dashboard');
 
 use App\Http\Controllers\UserController;
 
-// Rota para carregar o formulário (GET)
+// Rota da listagem e painel administrativo (GET)
+Route::get('/admin', [UserController::class, 'index']);
+
+// Rotas de criação de usuários
 Route::get('/usuarios/novo', [UserController::class, 'create']);
-// Rota para salvar os dados enviados (POST)
 Route::post('/usuarios', [UserController::class, 'store']);
 
 use App\Http\Controllers\LivroController;
@@ -25,6 +27,13 @@ use App\Http\Controllers\ProdutoController;
 
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
+
+use App\Http\Controllers\EventoController;
+
+// Rotas da Agenda de Eventos
+Route::get('/eventos', [EventoController::class, 'index']);
+Route::get('/eventos/novo', [EventoController::class, 'create']);
+Route::post('/eventos', [EventoController::class, 'store']);
 
 use App\Models\User;
 
