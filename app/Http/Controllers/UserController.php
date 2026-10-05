@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-
+    
     /**
      * Exibe a listagem de usuários com suporte a filtro de busca.
      */
@@ -16,7 +17,7 @@ class UserController extends Controller
         // Captura o termo de busca enviado pelo formulário GET
         $busca = $request->input('busca');
 
-        // Se houver busca, filtra por nome; caso contrário, busca todos ordenados por nome
+        // Captura o termo de busca enviado pelo formulário GET
         if ($busca) {
             $usuarios = User::where('name', 'like', "%{$busca}%", 'and')
                 ->orderBy('name', 'asc')
@@ -28,15 +29,13 @@ class UserController extends Controller
         // Retorna a view do painel passando a coleção de usuários e o termo pesquisado
         return view('admin.dashboard', compact('usuarios', 'busca'));
     }
-    /**
-     * Exibe o formulário de cadastro de usuários.
-     */
+
     public function create()
     {
         return view('users.create');
     }
-
-    /**
+    
+     /**
      * Salva o novo usuário no banco de dados com validação.
      */
     public function store(Request $request)
@@ -51,7 +50,46 @@ class UserController extends Controller
         // Persistência no banco usando o ORM Eloquent
         User::create($dadosValidados);
 
-        // Redireciona para o painel administrativo com mensagem de sucesso
+        // Validação dos campos do formulário
         return redirect('/admin')->with('sucesso', 'Usuário cadastrado com sucesso');
+    }
+
+    /**
+     * Localiza o usuário pelo ID e exibe o formulário de edição preenchido.
+     */
+    public function edit($id)
+    {
+        $usuario = User::findOrFail($id);
+
+        return view('users.edit', compact('usuario'));
+    }
+
+    /**
+     * Valida os novos dados e atualiza o registro no banco de dados.
+     */
+    public function update(Request $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        // Validação garantindo que o e-mail continue único, ignorando o próprio ID do usuário
+        $dadosValidados = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($usuario->id),
+            ],
+            'password' => 'nullable|min:6',
+        ]);
+
+        // Se o campo de senha não foi preenchido, remove do array para não sobrescrever com valor vazio
+        if (empty($dadosValidados['password'])) {
+            unset($dadosValidados['password']);
+        }
+
+        // Atualiza os dados no banco de dados
+        $usuario->update($dadosValidados);
+
+        return redirect('/admin')->with('sucesso', 'Usuário atualizado com sucesso');
     }
 }

@@ -14,6 +14,16 @@ use App\Http\Controllers\UserController;
 // Rota da listagem e painel administrativo (GET)
 Route::get('/admin', [UserController::class, 'index']);
 
+// Rotas para carregar o formulário (GET)
+Route::get('/usuarios/novo', [UserController::class, 'create']);
+
+// Rotas para salvar o formulário (POST)
+Route::post('/usuarios', [UserController::class, 'store']);
+
+// Rotas de edição e atualização
+Route::get('/usuarios/{id}/editar', [UserController::class, 'edit']);
+Route::put('/usuarios/{id}', [UserController::class, 'update']);
+
 // Rotas de criação de usuários
 Route::get('/usuarios/novo', [UserController::class, 'create']);
 Route::post('/usuarios', [UserController::class, 'store']);
