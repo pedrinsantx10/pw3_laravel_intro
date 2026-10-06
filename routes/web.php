@@ -20,13 +20,17 @@ Route::get('/usuarios/novo', [UserController::class, 'create']);
 // Rotas para salvar o formulário (POST)
 Route::post('/usuarios', [UserController::class, 'store']);
 
-// Rotas de edição e atualização
+// Rotas de criação
+Route::get('/usuarios/novo', [UserController::class, 'create']);
+Route::post('/usuarios', [UserController::class, 'store']);
+
+// Rotas de edição
 Route::get('/usuarios/{id}/editar', [UserController::class, 'edit']);
 Route::put('/usuarios/{id}', [UserController::class, 'update']);
 
-// Rotas de criação de usuários
-Route::get('/usuarios/novo', [UserController::class, 'create']);
-Route::post('/usuarios', [UserController::class, 'store']);
+// Rota de exclusão (DELETE)
+Route::delete('/usuarios/{id}', [UserController::class, 'destroy']);
+
 
 use App\Http\Controllers\LivroController;
 
