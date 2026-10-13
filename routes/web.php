@@ -32,6 +32,7 @@ Route::put('/usuarios/{id}', [UserController::class, 'update']);
 Route::delete('/usuarios/{id}', [UserController::class, 'destroy']);
 
 
+
 use App\Http\Controllers\LivroController;
 
 Route::get('/livros', [LivroController::class, 'index']);
@@ -41,6 +42,8 @@ use App\Http\Controllers\ProdutoController;
 
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
+
+
 
 use App\Http\Controllers\EventoController;
 
