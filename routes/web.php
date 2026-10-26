@@ -43,6 +43,9 @@ use App\Http\Controllers\ProdutoController;
 Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::post('/produtos', [ProdutoController::class, 'store']);
 
+Route::resource('produtos', ProdutoController::class);
+
+
 
 
 use App\Http\Controllers\EventoController;
